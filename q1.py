@@ -26,11 +26,6 @@ class bot:
                 state.append(self.pos)
             else:
                 new = random.randint(0, 1)
-                #print(("Moved %s" % ("Left" if new==0 else "Right")), end = '')
-                #if self.pos== new:
-                #    print(". But bot was already here.")
-                #else:
-                #    print()
                 self.pos = new
                 state.append(self.pos)
             moves += 1
