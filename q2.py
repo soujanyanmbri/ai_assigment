@@ -57,19 +57,19 @@ if __name__ == '__main__':
       t,agent1_stones,agent1_pile=botPlay(piles,False)
       piles[agent1_pile]-=agent1_stones
       player1 = True
-      print("Agent 1 has removed "+str(agent1_stones)+" stones from Pile "+str(agent1_pile+1))
+      print("Bot 1 has removed "+str(agent1_stones)+" stones from Pile "+str(agent1_pile+1))
       if not isGameOver(piles):
         gameState(piles)
         t,agent1_stones,agent1_pile=botPlay(piles,True)
         piles[agent1_pile]-=agent1_stones
-        print("Agent 2 has removed "+str(agent1_stones)+" stones from Pile "+str(agent1_pile+1))
+        print("Bot 2 has removed "+str(agent1_stones)+" stones from Pile "+str(agent1_pile+1))
         player1 = False
     if(player1):
       gameState(piles)
-      print("Player 1 Won!")
+      print("Bot 1 Won!")
     else:
       gameState(piles)
-      print("Player 2 Won!")
+      print("Bot 2 Won!")
   else:
     turnH = int(input("Enter 1 if you want to start first, 2 otherwise: "))
     if(turnH == 1):
@@ -83,7 +83,7 @@ if __name__ == '__main__':
         if not isGameOver(piles):
           t,agent_stones,agent_pile=botPlay(piles,False)
           piles[agent_pile]-=agent_stones
-          print("Agent has removed "+str(agent_stones)+" stones from Pile "+str(agent_pile+1))
+          print("Bot has removed "+str(agent_stones)+" stones from Pile "+str(agent_pile+1))
           human_player=False
       if(human_player):
         gameState(piles)
@@ -96,7 +96,7 @@ if __name__ == '__main__':
         gameState(piles)
         t,agent_stones,agent_pile=botPlay(piles,False)
         piles[agent_pile]-=agent_stones
-        print("Agent has removed "+str(agent_stones)+" stones from Pile "+str(agent_pile+1))
+        print("Bot has removed "+str(agent_stones)+" stones from Pile "+str(agent_pile+1))
         human_player=False
         if not isGameOver(piles):
           gameState(piles)
