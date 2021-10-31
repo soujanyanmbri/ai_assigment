@@ -1,6 +1,5 @@
 
 import numpy as np
-
 def isGameOver(piles):
   if(np.sum(piles)!=0):
     return False
@@ -33,7 +32,6 @@ def botPlay(piles,maxPlayer):
           stone_remove=removed
           pile_remove=i
     return res_max,stone_remove,pile_remove  
-
   else:
     res_min= float('inf')
     for i in range(2):
@@ -49,23 +47,67 @@ def botPlay(piles,maxPlayer):
     return res_min,stone_remove,pile_remove
 
 if __name__ == '__main__':
+  turn = int(input("Enter 1 for BotVsBot and 2 for HumanVsBot: "))
   p1=int(input("Enter the number of stones in pile 1: "))
   p2=int(input("Enter the number of stones in pile 2: "))
   piles=[p1,p2]
-  while(not isGameOver(piles)):
-    gameState(piles)
-    pile=int(input("Enter the pile you want to remove from: "))
-    stones=(int(input("Enter the number of stones you want to remove: ")))
-    human_player=True
-    piles[pile-1]-=stones
-    gameState(piles);
-    if not isGameOver(piles):
-      t,agent_stones,agent_pile=botPlay(piles,False)
-      piles[agent_pile]-=agent_stones
-      print("Agent has removed "+str(agent_stones)+" stones from Pile "+str(agent_pile+1))
-      human_player=False
-  if(human_player):
-    print("You Won!")
+  if(turn == 1):
+    while( not isGameOver(piles)):
+      gameState(piles)
+      t,agent1_stones,agent1_pile=botPlay(piles,False)
+      piles[agent1_pile]-=agent1_stones
+      player1 = True
+      print("Agent 1 has removed "+str(agent1_stones)+" stones from Pile "+str(agent1_pile+1))
+      if not isGameOver(piles):
+        gameState(piles)
+        t,agent1_stones,agent1_pile=botPlay(piles,True)
+        piles[agent1_pile]-=agent1_stones
+        print("Agent 2 has removed "+str(agent1_stones)+" stones from Pile "+str(agent1_pile+1))
+        player1 = False
+    if(player1):
+      gameState(piles)
+      print("Player 1 Won!")
+    else:
+      gameState(piles)
+      print("Player 2 Won!")
   else:
-    print("You lost!")
+    turnH = int(input("Enter 1 if you want to start first, 2 otherwise: "))
+    if(turnH == 1):
+      while(not isGameOver(piles)):
+        gameState(piles)
+        pile=int(input("Enter the pile you want to remove from: "))
+        stones=(int(input("Enter the number of stones you want to remove: ")))
+        human_player=True
+        piles[pile-1]-=stones
+        gameState(piles)
+        if not isGameOver(piles):
+          t,agent_stones,agent_pile=botPlay(piles,False)
+          piles[agent_pile]-=agent_stones
+          print("Agent has removed "+str(agent_stones)+" stones from Pile "+str(agent_pile+1))
+          human_player=False
+      if(human_player):
+        gameState(piles)
+        print("You Won!")
+      else:
+        gameState(piles)
+        print("You lost!")  
+    else:
+      while(not isGameOver(piles)):
+        gameState(piles)
+        t,agent_stones,agent_pile=botPlay(piles,False)
+        piles[agent_pile]-=agent_stones
+        print("Agent has removed "+str(agent_stones)+" stones from Pile "+str(agent_pile+1))
+        human_player=False
+        if not isGameOver(piles):
+          gameState(piles)
+          pile=int(input("Enter the pile you want to remove from: "))
+          stones=(int(input("Enter the number of stones you want to remove: ")))
+          human_player=True
+          piles[pile-1]-=stones
+      if(human_player):
+        gameState(piles)
+        print("You Won!")
+      else:
+        gameState(piles)
+        print("You lost!")  
 
